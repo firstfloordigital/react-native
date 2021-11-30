@@ -13,8 +13,10 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import android.util.Log;
 
 public class Arguments {
+  private static final String TAG = "ReactNative.Arguments";
   private static Object makeNativeObject(Object object) {
     if (object == null) {
       return null;
@@ -299,6 +301,8 @@ public class Arguments {
       } else if (value instanceof List) {
         map.putArray(key, fromList((List) value));
       } else {
+        Log.e(TAG, "makeNativeArray: Could not convert: " + value.getClass());
+        Log.e(TAG, "makeNativeArray: Could not convert: " + value);
         throw new IllegalArgumentException("Could not convert " + value.getClass());
       }
     }
